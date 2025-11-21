@@ -1,40 +1,45 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ClientBody from "./ClientBody";
-import Script from "next/script";
+import MobileNav from "@/components/MobileNav";
+import Link from "next/link";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "The Nest at York — Boutique Lodge in Highlands, Harare",
-  description:
-    "A serene three-bedroom retreat with patio, garden views and open-plan living. Book The Nest at York on Airbnb.",
+export const metadata = {
+  title: "Nest at York",
+  description: "Hotel-inspired demo",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <head>
-        <Script
-          crossOrigin="anonymous"
-          src="//unpkg.com/same-runtime/dist/index.global.js"
-        />
-      </head>
-      <body suppressHydrationWarning className="antialiased bg-white text-neutral-900">
-        <ClientBody>{children}</ClientBody>
+    <html lang="en">
+      <body className="antialiased">
+        <header className="fixed w-full z-30 bg-transparent">
+          <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Link href="/" className="text-xl font-semibold">NestAtYork</Link>
+            </div>
+
+            {/* Desktop nav */}
+            <nav className="hidden md:flex items-center gap-6">
+              <a href="#home" className="hover:underline">Home</a>
+              <a href="#rooms" className="hover:underline">Rooms</a>
+              <a href="#dining" className="hover:underline">Dining</a>
+              <a href="#services" className="hover:underline">Guest Services</a>
+              <Link href="/rooms" className="text-sm px-3 py-1 border rounded">Rooms</Link>
+            </nav>
+
+            {/* Mobile nav button */}
+            <div className="md:hidden">
+              <MobileNav />
+            </div>
+          </div>
+        </header>
+
+        <main id="home" className="pt-20">
+          {children}
+        </main>
+
+        <footer className="mt-20 py-12 text-center text-sm text-slate-600">
+          © {new Date().getFullYear()} NestAtYork
+        </footer>
       </body>
     </html>
   );

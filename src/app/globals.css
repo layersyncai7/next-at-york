@@ -79,3 +79,48 @@
 body {
   font-feature-settings: "liga" 1, "kern" 1;
 }
+
+/* Smooth anchor scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Import web fonts (Playfair Display for headings, Inter for body) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+
+/* CSS variables for typography */
+:root{
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --heading-tracking: -0.02em;
+  --lead-weight: 600;
+}
+
+/* Apply base families */
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings: luxe serif with refined letter-spacing */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  letter-spacing: var(--heading-tracking);
+  line-height: 1.05;
+}
+
+/* Small visual tweaks */
+.lead {
+  font-weight: var(--lead-weight);
+  letter-spacing: 0.01em;
+}
+
+/* Subtle transform utility helpers (for components) */
+.reveal {
+  transform-origin: center;
+  transition: transform 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.45s;
+}
+.reveal:hover {
+  transform: translateY(-6px) scale(1.01);
+}
